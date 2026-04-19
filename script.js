@@ -2,7 +2,7 @@
    LUCKY WHEEL — script.js
 ════════════════════════════════════════════ */
 
-const WORKER_URL = 'https://YOUR_WORKER.YOUR_SUBDOMAIN.workers.dev';
+const WORKER_URL = 'https://rough-lake-9ff1.luckywheels509.workers.dev';
 
 /* ─── Load contact links from Worker config ── */
 fetch(WORKER_URL + '/config')
