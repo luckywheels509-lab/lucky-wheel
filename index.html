@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lucky Wheel — Gaming Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       NAVIGATION
+  ════════════════════════════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-brand">
+      <i class="fa-solid fa-dice-d20"></i>
+      <span>Lucky Wheel</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#spin">Daily Spin</a></li>
+      <li><a href="#games">Games</a></li>
+      <li><a href="#socials">Socials</a></li>
+    </ul>
+    <button class="nav-cta">Join Free</button>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════
+       HERO SECTION
+  ════════════════════════════════════════════ -->
+  <section class="hero" id="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-particles" id="particles"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i class="fa-solid fa-circle-check"></i> No Registration Required
+      </div>
+      <h1 class="hero-title">
+        Play.<br /><span class="gradient-text">Win.</span><br />Repeat.
+      </h1>
+      <p class="hero-sub">
+        Instant access to the best crypto games, daily bonuses,
+        and an exclusive spin wheel — all in one portal.
+      </p>
+      <div class="hero-actions">
+        <a href="#spin" class="btn btn-primary">
+          <i class="fa-solid fa-gift"></i> Spin to Win
+        </a>
+        <a href="#games" class="btn btn-ghost">
+          <i class="fa-solid fa-gamepad"></i> Browse Games
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span>12K+</span><p>Active Players</p></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span>50+</span><p>Games</p></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span>24/7</span><p>Support</p></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card-float card-1">
+        <i class="fa-solid fa-coins"></i>
+        <span>+2,500 Coins</span>
+      </div>
+      <div class="hero-card-float card-2">
+        <i class="fa-solid fa-trophy"></i>
+        <span>Jackpot Hit!</span>
+      </div>
+      <div class="hero-card-float card-3">
+        <i class="fa-solid fa-bolt"></i>
+        <span>Free Spin</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       DAILY SPIN WHEEL
+  ════════════════════════════════════════════ -->
+  <section class="spin-section" id="spin">
+    <div class="section-header">
+      <span class="section-tag">Limited — Once Per Day</span>
+      <h2>Daily Spin Wheel</h2>
+      <p>Spin the wheel and unlock exclusive bonus codes shared on our socials!</p>
+    </div>
+
+    <!-- HOW TO PARTICIPATE BANNER -->
+    <div class="spin-join-banner">
+      <div class="sjb-icon"><i class="fa-brands fa-facebook-f"></i></div>
+      <div class="sjb-text">
+        <strong>New Players:</strong> Message our official Facebook page to create an account and unlock your Free Spin access.
+      </div>
+      <a href="#" data-social="facebook" target="_blank" class="btn btn-primary btn-sm">
+        <i class="fa-brands fa-facebook-f"></i> Message Us
+      </a>
+    </div>
+
+    <div class="spin-username-bar">
+      <label for="spinUsernameInput"><i class="fa-solid fa-user"></i> &nbsp;Enter Your Username to Spin</label>
+      <div class="sub-row">
+        <input type="text" id="spinUsernameInput" placeholder="Enter your account username..." maxlength="24" autocomplete="off" spellcheck="false" />
+        <button class="btn btn-primary btn-sm" id="spinUsernameBtn">
+          <i class="fa-solid fa-circle-check"></i> Confirm
+        </button>
+      </div>
+      <p class="spin-setup-hint">
+        <i class="fa-solid fa-circle-info"></i> Don't have an account?
+        <a href="#" data-social="facebook" target="_blank"><i class="fa-brands fa-facebook-f"></i> Facebook</a> ·
+        <a href="#" data-social="messenger" target="_blank"><i class="fa-brands fa-facebook-messenger"></i> Messenger</a> ·
+        <a href="#" data-social="telegram" target="_blank"><i class="fa-brands fa-telegram"></i> Telegram</a> ·
+        <a href="#" data-social="signal" target="_blank"><i class="fa-brands fa-signal-messenger"></i> Signal</a>
+      </p>
+    </div>
+
+    <div id="spinMsg"></div>
+
+    <div class="wheel-wrapper">
+      <div class="wheel-container">
+        <div class="wheel-pointer">
+          <i class="fa-solid fa-caret-down"></i>
+        </div>
+        <canvas id="spinCanvas" width="380" height="380"></canvas>
+        <div class="wheel-center-btn" id="spinBtn">
+          <span>SPIN</span>
+        </div>
+      </div>
+
+      <div class="spin-result" id="spinResult">
+        <div class="result-icon"><i class="fa-solid fa-party-horn"></i></div>
+        <h3 id="resultTitle">You landed on <span id="resultSegment"></span>!</h3>
+        <p>Check our socials for your bonus code!</p>
+        <div class="result-socials">
+          <a href="#socials" class="btn btn-primary btn-sm">
+            <i class="fa-brands fa-telegram"></i> Get Code
+          </a>
+          <button class="btn btn-ghost btn-sm" id="getReceiptBtn">
+            <i class="fa-solid fa-receipt"></i> Get Receipt
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TERMS & CONDITIONS ACCORDION -->
+    <div class="terms-wrapper">
+      <button class="terms-toggle" id="termsToggle">
+        <span><i class="fa-solid fa-shield-halved"></i> Free Spin Wheel — Rules &amp; Terms</span>
+        <i class="fa-solid fa-chevron-down terms-chevron"></i>
+      </button>
+
+      <div class="terms-body" id="termsBody">
+
+        <!-- eligibility cards -->
+        <div class="terms-cards">
+          <div class="terms-card tc-new">
+            <div class="tc-icon"><i class="fa-solid fa-user-plus"></i></div>
+            <h4>New Players</h4>
+            <ul>
+              <li>Message our <strong>official Facebook page</strong> to create an account.</li>
+              <li>Free Spin access granted for <strong>24 hours</strong> from account creation.</li>
+              <li>Winnings redeemable within <strong>24 hrs</strong>.</li>
+              <li>Spins reset every <strong>2 hours</strong> within your window.</li>
+            </ul>
+          </div>
+          <div class="terms-card tc-deposit">
+            <div class="tc-icon"><i class="fa-solid fa-coins"></i></div>
+            <h4>Deposit Players</h4>
+            <ul>
+              <li>Minimum deposit of <strong>$10</strong> required to activate the wheel.</li>
+              <li>Free Spin access extended to <strong>3 days (72 hrs)</strong> from deposit time.</li>
+              <li>All points accumulated on the wheel become accessible.</li>
+              <li>Spins reset every <strong>2 hours</strong> within your window.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="terms-divider"></div>
+
+        <!-- accordion items -->
+        <div class="terms-accordion">
+
+          <div class="ta-item">
+            <button class="ta-header">
+              <i class="fa-solid fa-gift"></i> Winning &amp; Redemption
+              <i class="fa-solid fa-plus ta-icon"></i>
+            </button>
+            <div class="ta-body">
+              <p>Winnings from the Free Spin Wheel are credited directly to your balance and can be redeemed at any time within your eligibility window — <strong>24 hours</strong> for non-depositing players and <strong>72 hours (3 days)</strong> for depositing players.</p>
+              <p>Your winnings will be provided as <strong>Freeplay</strong>, which can be used on any platform offered through our Facebook page.</p>
+            </div>
+          </div>
+
+          <div class="ta-item">
+            <button class="ta-header">
+              <i class="fa-solid fa-ban"></i> Abuse Prevention &amp; Fair Play
+              <i class="fa-solid fa-plus ta-icon"></i>
+            </button>
+            <div class="ta-body">
+              <p>Any abuse or attempt to manipulate the Free Spin Wheel or redemption system will result in the <strong>suspension or termination</strong> of the player's account.</p>
+              <p>We monitor all activity to ensure a fair experience for every player.</p>
+            </div>
+          </div>
+
+          <div class="ta-item">
+            <button class="ta-header">
+              <i class="fa-solid fa-file-pen"></i> Changes to Terms
+              <i class="fa-solid fa-plus ta-icon"></i>
+            </button>
+            <div class="ta-body">
+              <p>We reserve the right to <strong>modify, suspend, or cancel</strong> the Free Spin Wheel promotion or any associated terms at any time without prior notice.</p>
+              <p>All changes will be communicated to players via our <strong>Facebook Page</strong>.</p>
+            </div>
+          </div>
+
+          <div class="ta-item">
+            <button class="ta-header">
+              <i class="fa-solid fa-heart-pulse"></i> Responsible Gambling
+              <i class="fa-solid fa-plus ta-icon"></i>
+            </button>
+            <div class="ta-body">
+              <p>We promote responsible gambling practices. If you or someone you know is experiencing gambling-related issues, please <strong>contact customer support</strong> for assistance.</p>
+            </div>
+          </div>
+
+        </div><!-- /terms-accordion -->
+
+      </div><!-- /terms-body -->
+    </div><!-- /terms-wrapper -->
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       GAMES LIST
+  ════════════════════════════════════════════ -->
+  <section class="games-section" id="games">
+    <div class="section-header">
+      <span class="section-tag">Hot Right Now</span>
+      <h2>Featured Games</h2>
+      <p>Provably fair, crypto-native games available instantly.</p>
+    </div>
+
+    <div class="games-grid" id="gamesGrid">
+      <!-- Juwa Game Card -->
+      <div class="game-card">
+        <img src="juwa.jpg" alt="Juwa" class="game-image" />
+        <div class="game-info">
+          <h3>Juwa</h3>
+          <p>Popular fish game with big wins</p>
+          <a href="#" class="btn btn-primary btn-sm">Play Now</a>
+        </div>
+      </div>
+      <!-- Juwa 2 Game Card -->
+      <div class="game-card">
+        <img src="https://juwaapp.com/wp-content/uploads/al_opt_content/IMAGE/juwaapp.com/wp-content/uploads/2024/11/Juwa-2.0-Online.png.bv.webp?bv_host=juwaapp.com" alt="Juwa 2" class="game-image" />
+        <div class="game-info">
+          <h3>Juwa 2</h3>
+          <p>Upgraded version with new features</p>
+          <a href="#" class="btn btn-primary btn-sm">Play Now</a>
+        </div>
+      </div>
+      <!-- Chips injected by script.js -->
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SOCIAL HUB
+  ════════════════════════════════════════════ -->
+  <section class="socials-section" id="socials">
+    <div class="section-header">
+      <span class="section-tag">Stay Connected</span>
+      <h2>Join Our Community</h2>
+      <p>Follow us to receive exclusive bonus codes, giveaways, and game updates.</p>
+    </div>
+
+    <div class="socials-grid">
+      <a href="#" data-social="facebook" target="_blank" class="social-card facebook" aria-label="Facebook">
+        <div class="social-icon"><i class="fa-brands fa-facebook-f"></i></div>
+        <div class="social-info">
+          <h3>Facebook</h3>
+          <p>Join 8,000+ fans</p>
+        </div>
+        <i class="fa-solid fa-arrow-right social-arrow"></i>
+      </a>
+
+      <a href="#" data-social="telegram" target="_blank" class="social-card telegram" aria-label="Telegram">
+        <div class="social-icon"><i class="fa-brands fa-telegram"></i></div>
+        <div class="social-info">
+          <h3>Telegram</h3>
+          <p>Instant bonus drops</p>
+        </div>
+        <i class="fa-solid fa-arrow-right social-arrow"></i>
+      </a>
+
+      <a href="#" data-social="signal" target="_blank" class="social-card signal" aria-label="Signal">
+        <div class="social-icon"><i class="fa-brands fa-signal-messenger"></i></div>
+        <div class="social-info">
+          <h3>Signal</h3>
+          <p>Private VIP channel</p>
+        </div>
+        <i class="fa-solid fa-arrow-right social-arrow"></i>
+      </a>
+
+      <a href="#" data-social="messenger" target="_blank" class="social-card messenger" aria-label="Messenger">
+        <div class="social-icon"><i class="fa-brands fa-facebook-messenger"></i></div>
+        <div class="social-info">
+          <h3>Messenger</h3>
+          <p>Chat with support</p>
+        </div>
+        <i class="fa-solid fa-arrow-right social-arrow"></i>
+      </a>
+    </div>
+
+    <div class="newsletter">
+      <i class="fa-solid fa-envelope-open-text"></i>
+      <div>
+        <h3>Get codes by email</h3>
+        <p>No spam — bonus codes only.</p>
+      </div>
+      <form class="newsletter-form" id="newsletterForm">
+        <input type="email" placeholder="your@email.com" required />
+        <button type="submit" class="btn btn-primary btn-sm">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <i class="fa-solid fa-dice-d20"></i>
+        <span>Lucky Wheel</span>
+      </div>
+      <p class="footer-disclaimer">
+        This portal is for entertainment and informational purposes only.
+        Please play responsibly. 18+
+      </p>
+      <p class="footer-copy">© 2026 Lucky Wheel. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════
+       USERNAME MODAL
+  ════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-box" id="modalBox" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+      <div class="modal-icon"><i class="fa-solid fa-id-badge"></i></div>
+      <h2 class="modal-title" id="modalTitle">Enter Your Username</h2>
+      <p class="modal-sub">Enter your username to spin the wheel and generate your receipt.</p>
+      <form class="modal-form" id="usernameForm" autocomplete="off">
+        <div class="modal-field">
+          <label for="usernameInput">Username</label>
+          <input
+            id="usernameInput"
+            type="text"
+            placeholder="e.g. LuckyPlayer99"
+            maxlength="24"
+            required
+            spellcheck="false"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">
+          <i class="fa-solid fa-download"></i> Download Receipt
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- hidden receipt canvas (never shown in DOM) -->
+  <canvas id="receiptCanvas" style="display:none;"></canvas>
+
+  <!-- ═══════════════════════════════════════════
+       CONTACT BUTTONS - ALWAYS VISIBLE
+  ════════════════════════════════════════════ -->
+  <div class="contact-bar" id="contactBar">
+    <a href="#" data-social="facebook" target="_blank" class="contact-btn facebook-page" aria-label="Facebook Page">
+      <i class="fa-brands fa-facebook-f"></i>
+    </a>
+    <a href="#" data-social="messenger" target="_blank" class="contact-btn messenger" aria-label="Messenger">
+      <i class="fa-brands fa-facebook-messenger"></i>
+    </a>
+    <a href="#" data-social="telegram" target="_blank" class="contact-btn telegram" aria-label="Telegram">
+      <i class="fa-brands fa-telegram"></i>
+    </a>
+    <a href="#" data-social="signal" target="_blank" class="contact-btn signal" aria-label="Signal">
+      <i class="fa-brands fa-signal-messenger"></i>
+    </a>
+  </div>
+  <!--End of Contact Bar-->
+
+  <script src="script.js"></script>
+</body>
+</html>
