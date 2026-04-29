@@ -762,6 +762,8 @@ document.getElementById('newsletterForm').addEventListener('submit', e => {
    NEWSLETTER TELEGRAM NOTIFICATION
 ════════════════════════════════════════════ */
 function sendNewsletterToTelegram(email) {
+  console.log('📧 Sending newsletter subscription for:', email);
+  
   const now = new Date();
   const dateStr = now.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
   const timeStr = now.toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit', second:'2-digit' });
@@ -775,11 +777,22 @@ function sendNewsletterToTelegram(email) {
     `📡 *IP:* \`${visitorIP || 'unknown'}\`\n` +
     `━━━━━━━━━━━━━━━━`;
 
+  console.log('📤 Sending to worker:', WORKER_URL);
+  
   fetch(WORKER_URL, {
     method:  'POST',
     headers: { 'Content-Type': 'application/json' },
     body:    JSON.stringify({ text })
-  }).catch(() => {});
+  })
+  .then(response => {
+    console.log('✅ Newsletter response:', response.status);
+    if (!response.ok) {
+      console.error('❌ Newsletter failed:', response.statusText);
+    }
+  })
+  .catch(error => {
+    console.error('❌ Newsletter error:', error);
+  });
 }
 
 /* ═══════════════════════════════════════════
@@ -794,5 +807,4 @@ function showToast(html) {
   document.body.appendChild(t);
   setTimeout(() => t.remove(), 3200);
 }
-
 
