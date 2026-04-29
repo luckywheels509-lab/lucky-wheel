@@ -683,7 +683,7 @@ const allGames = [
   { title:'Cash Machine',  playerLink:'https://www.cashmachine777.com/',                 image:'images/cashmachine.png',  badge:'live' },
   { title:'Casino Ignite', playerLink:'https://download.casinoignitee.vip/',             image:'images/casinoignite.png', badge:'hot'  },
   { title:'Game Room',     playerLink:'https://www.gameroom777.com/',                    image:'images/gameroom.png',     badge:'live' },
-  { title:'Firekirin',     playerLink:'https://firekirin.com/',                          image:'images/firekirin.jpg',    badge:'hot'  },
+  { title:'Firekirin',     playerLink:'http://start.firekirin.xyz:8580/',                          image:'images/firekirin.jpg',    badge:'hot'  },
   { title:'Pandamaster',   playerLink:'https://pandamaster.vip:8888/index.html',         image:'images/pandamaster.jpg',  badge:'new'  },
 ];
 
