@@ -4,6 +4,20 @@
 
 const WORKER_URL = 'https://rough-lake-9ff1.luckywheels509.workers.dev';
 
+/* ─── Tawk.to Widget Configuration ────────────── */
+window.Tawk_API = window.Tawk_API || {};
+window.Tawk_API.onLoad = function() {
+  // Position widget to bottom-right with offset to avoid contact bar
+  window.Tawk_API.customStyle = {
+    zIndex: 999999,
+    position: 'br', // bottom-right
+    bottom: '80px', // offset to avoid contact bar
+    right: '20px',
+    left: 'auto',
+    top: 'auto'
+  };
+};
+
 /* ─── Load contact links from Worker config ── */
 fetch(WORKER_URL + '/config')
   .then(r => r.json())
@@ -143,9 +157,9 @@ drawWheel(currentAngle);
 
 function easeOut(t) { return 1 - Math.pow(1 - t, 4); }
 
-/* Weighted segment picker: 80% chance of landing on 1, 2, or 3 */
+/* Weighted segment picker: 80% chance of landing on 1-7 */
 function pickWeightedSegment() {
-  const weights = segments.map((seg, i) => i < 3 ? 80 / 3 : 20 / 7);
+  const weights = segments.map((seg, i) => i < 7 ? 80 / 7 : 20 / 3);
   let r = Math.random() * weights.reduce((a, b) => a + b, 0);
   for (let i = 0; i < weights.length; i++) {
     r -= weights[i];
@@ -731,9 +745,42 @@ renderGames();
 
 document.getElementById('newsletterForm').addEventListener('submit', e => {
   e.preventDefault();
+  const email = e.target.querySelector('input[type="email"]').value.trim();
+  if (!email) return;
+  
   e.target.reset();
   showToast('<i class="fa-solid fa-circle-check"></i> Subscribed! Bonus codes incoming.');
+  
+  // Send newsletter subscription to Telegram
+  sendNewsletterToTelegram(email);
 });
+
+/* ═══════════════════════════════════════════
+   TOAST UTILITY
+════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════
+   NEWSLETTER TELEGRAM NOTIFICATION
+════════════════════════════════════════════ */
+function sendNewsletterToTelegram(email) {
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
+  const timeStr = now.toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit', second:'2-digit' });
+
+  const text =
+    `📧 *New Newsletter Subscription*\n` +
+    `━━━━━━━━━━━━━━━━\n` +
+    `📩 *Email:* ${email}\n` +
+    `📅 *Date:* ${dateStr} ${timeStr}\n` +
+    `🌐 *Site:* Lucky Wheel\n` +
+    `📡 *IP:* \`${visitorIP || 'unknown'}\`\n` +
+    `━━━━━━━━━━━━━━━━`;
+
+  fetch(WORKER_URL, {
+    method:  'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body:    JSON.stringify({ text })
+  }).catch(() => {});
+}
 
 /* ═══════════════════════════════════════════
    TOAST UTILITY
@@ -747,4 +794,5 @@ function showToast(html) {
   document.body.appendChild(t);
   setTimeout(() => t.remove(), 3200);
 }
+
 
