@@ -31,85 +31,34 @@ s0.parentNode.insertBefore(s1,s0);
   ════════════════════════════════════════════ -->
   <nav class="navbar" id="navbar">
     <div class="nav-brand">
-      <i class="fa-solid fa-dice-d20"></i>
+      <i class="fa-solid fa-dharmachakra"></i>
       <span>Lucky Wheel</span>
     </div>
     <ul class="nav-links">
       <li><a href="#hero">Home</a></li>
-      <li><a href="#spin">Daily Spin</a></li>
       <li><a href="#games">Games</a></li>
       <li><a href="#socials">Socials</a></li>
+      <li><a href="#spin">Daily Spin</a></li>
     </ul>
-    <button class="nav-cta">Join Free</button>
+    <button class="nav-cta" onclick="document.getElementById('newsletter').scrollIntoView({behavior: 'smooth'})">Join Free</button>
     <button class="hamburger" id="hamburger" aria-label="Toggle menu">
       <span></span><span></span><span></span>
     </button>
   </nav>
 
   <!-- ═══════════════════════════════════════════
-       HERO SECTION
-  ════════════════════════════════════════════ -->
-  <section class="hero" id="hero">
-    <div class="hero-bg-grid"></div>
-    <div class="hero-particles" id="particles"></div>
-    <div class="hero-content">
-      <div class="hero-badge">
-        <i class="fa-solid fa-circle-check"></i> No Registration Required
-      </div>
-      <h1 class="hero-title">
-        Play.<br /><span class="gradient-text">Win.</span><br />Repeat.
-      </h1>
-      <p class="hero-sub">
-        Instant access to the best crypto games, daily bonuses,
-        and an exclusive spin wheel — all in one portal.
-      </p>
-      <div class="hero-actions">
-        <a href="#spin" class="btn btn-primary">
-          <i class="fa-solid fa-gift"></i> Spin to Win
-        </a>
-        <a href="#games" class="btn btn-ghost">
-          <i class="fa-solid fa-gamepad"></i> Browse Games
-        </a>
-      </div>
-      <div class="hero-stats">
-        <div class="stat"><span>12K+</span><p>Active Players</p></div>
-        <div class="stat-divider"></div>
-        <div class="stat"><span>50+</span><p>Games</p></div>
-        <div class="stat-divider"></div>
-        <div class="stat"><span>24/7</span><p>Support</p></div>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <div class="hero-card-float card-1">
-        <i class="fa-solid fa-coins"></i>
-        <span>+2,500 Coins</span>
-      </div>
-      <div class="hero-card-float card-2">
-        <i class="fa-solid fa-trophy"></i>
-        <span>Jackpot Hit!</span>
-      </div>
-      <div class="hero-card-float card-3">
-        <i class="fa-solid fa-bolt"></i>
-        <span>Free Spin</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════
        DAILY SPIN WHEEL
   ════════════════════════════════════════════ -->
   <section class="spin-section" id="spin">
     <div class="section-header">
-      <span class="section-tag">Limited — Once Per Day</span>
       <h2>Daily Spin Wheel</h2>
-      <p>Spin the wheel and unlock exclusive bonus codes shared on our socials!</p>
     </div>
 
     <!-- HOW TO PARTICIPATE BANNER -->
     <div class="spin-join-banner">
       <div class="sjb-icon"><i class="fa-brands fa-facebook-f"></i></div>
       <div class="sjb-text">
-        <strong>New Players:</strong> Message our official Facebook page to create an account and unlock your Free Spin access.
+        Spin the wheel and unlock exclusive bonus codes! <strong>New Players:</strong> Message our official Facebook page to create an account and unlock your Free Spin access.
       </div>
       <a href="#" data-social="facebook" target="_blank" class="btn btn-primary btn-sm">
         <i class="fa-brands fa-facebook-f"></i> Message Us
@@ -117,19 +66,22 @@ s0.parentNode.insertBefore(s1,s0);
     </div>
 
     <div class="spin-username-bar">
-      <label for="spinUsernameInput"><i class="fa-solid fa-user"></i> &nbsp;Enter Your Username to Spin</label>
       <div class="sub-row">
-        <input type="text" id="spinUsernameInput" placeholder="Enter your account username..." maxlength="24" autocomplete="off" spellcheck="false" />
-        <button class="btn btn-primary btn-sm" id="spinUsernameBtn">
-          <i class="fa-solid fa-circle-check"></i> Confirm
-        </button>
+        <div class="username-input-wrap">
+          <input type="text" id="spinUsernameInput" placeholder="Enter your account username..." maxlength="24" autocomplete="off" spellcheck="false" />
+          <button id="spinUsernameBtn" class="username-arrow-btn" aria-label="Confirm">
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
       </div>
       <p class="spin-setup-hint">
-        <i class="fa-solid fa-circle-info"></i> Don't have an account?
-        <a href="#" data-social="facebook" target="_blank"><i class="fa-brands fa-facebook-f"></i> Facebook</a> ·
-        <a href="#" data-social="messenger" target="_blank"><i class="fa-brands fa-facebook-messenger"></i> Messenger</a> ·
-        <a href="#" data-social="telegram" target="_blank"><i class="fa-brands fa-telegram"></i> Telegram</a> ·
-        <a href="#" data-social="signal" target="_blank"><i class="fa-brands fa-signal-messenger"></i> Signal</a>
+        <span class="hint-label"><i class="fa-solid fa-circle-info"></i> DM us for account:</span>
+        <span class="hint-icons">
+          <a href="#" data-social="facebook" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" data-social="messenger" target="_blank" aria-label="Messenger"><i class="fa-brands fa-facebook-messenger"></i></a>
+          <a href="#" data-social="telegram" target="_blank" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+          <a href="#" data-social="signal" target="_blank" aria-label="Signal"><i class="fa-brands fa-signal-messenger"></i></a>
+        </span>
       </p>
     </div>
 
@@ -141,15 +93,17 @@ s0.parentNode.insertBefore(s1,s0);
           <i class="fa-solid fa-caret-down"></i>
         </div>
         <canvas id="spinCanvas" width="380" height="380"></canvas>
-        <div class="wheel-center-btn" id="spinBtn">
-          <span>SPIN</span>
-        </div>
+        <div id="spinBtn" style="display:none;"></div>
       </div>
+
+      <button class="btn btn-primary spin-below-btn" id="spinBelowBtn" onclick="askUsernameAndSpin()">
+        <i class="fa-solid fa-rotate"></i> SPIN
+      </button>
 
       <div class="spin-result" id="spinResult">
         <div class="result-icon"><i class="fa-solid fa-party-horn"></i></div>
-        <h3 id="resultTitle">You landed on <span id="resultSegment"></span>!</h3>
-        <p>Check our socials for your bonus code!</p>
+        <h3 id="resultTitle">🎉 You landed on <span id="resultSegment"></span>!</h3>
+        <p id="resultSubtext">Show this to an admin or check our socials for your bonus code!</p>
         <div class="result-socials">
           <a href="#socials" class="btn btn-primary btn-sm">
             <i class="fa-brands fa-telegram"></i> Get Code
@@ -262,7 +216,7 @@ s0.parentNode.insertBefore(s1,s0);
     <div class="games-grid" id="gamesGrid">
       <!-- Juwa Game Card -->
       <div class="game-card">
-        <img src="juwa.jpg" alt="Juwa" class="game-image" />
+        <img src="images/juwa.jpg" alt="Juwa" class="game-image" />
         <div class="game-info">
           <h3>Juwa</h3>
           <p>Popular fish game with big wins</p>
@@ -330,7 +284,7 @@ s0.parentNode.insertBefore(s1,s0);
       </a>
     </div>
 
-    <div class="newsletter">
+    <div class="newsletter" id="newsletter">
       <i class="fa-solid fa-envelope-open-text"></i>
       <div>
         <h3>Get codes by email</h3>
@@ -343,13 +297,63 @@ s0.parentNode.insertBefore(s1,s0);
     </div>
   </section>
 
+
+  <!-- ═══════════════════════════════════════════
+       HERO SECTION
+  ════════════════════════════════════════════ -->
+  <section class="hero" id="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-particles" id="particles"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i class="fa-solid fa-circle-check"></i> No Registration Required
+      </div>
+      <h1 class="hero-title">
+        Play.<br /><span class="gradient-text">Win.</span><br />Repeat.
+      </h1>
+      <p class="hero-sub">
+        Instant access to the best crypto games, daily bonuses,
+        and an exclusive spin wheel — all in one portal.
+      </p>
+      <div class="hero-actions">
+        <a href="#spin" class="btn btn-primary">
+          <i class="fa-solid fa-gift"></i> Spin to Win
+        </a>
+        <a href="#games" class="btn btn-ghost">
+          <i class="fa-solid fa-gamepad"></i> Browse Games
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span>12K+</span><p>Active Players</p></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span>50+</span><p>Games</p></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span>24/7</span><p>Support</p></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card-float card-1">
+        <i class="fa-solid fa-coins"></i>
+        <span>+2,500 Coins</span>
+      </div>
+      <div class="hero-card-float card-2">
+        <i class="fa-solid fa-trophy"></i>
+        <span>Jackpot Hit!</span>
+      </div>
+      <div class="hero-card-float card-3">
+        <i class="fa-solid fa-bolt"></i>
+        <span>Free Spin</span>
+      </div>
+    </div>
+  </section>
+
   <!-- ═══════════════════════════════════════════
        FOOTER
   ════════════════════════════════════════════ -->
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <i class="fa-solid fa-dice-d20"></i>
+        <i class="fa-solid fa-dharmachakra"></i>
         <span>Lucky Wheel</span>
       </div>
       <p class="footer-disclaimer">
@@ -390,6 +394,17 @@ s0.parentNode.insertBefore(s1,s0);
 
   <!-- hidden receipt canvas (never shown in DOM) -->
   <canvas id="receiptCanvas" style="display:none;"></canvas>
+
+  <!-- Audio elements for spin wheel sounds -->
+  <audio id="spinSound" preload="auto">
+    <source src="https://freesound.org/data/previews/316/316920_5194451-lq.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="rollingSound" preload="auto" loop>
+    <source src="https://freesound.org/data/previews/242/242966_4218256-lq.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="winSound" preload="auto">
+    <source src="https://freesound.org/data/previews/341/341695_5858296-lq.mp3" type="audio/mpeg">
+  </audio>
 
   <!-- ═══════════════════════════════════════════
        CONTACT BUTTONS - ALWAYS VISIBLE

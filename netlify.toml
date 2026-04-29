@@ -1,0 +1,7 @@
+[build]
+  publish = "."
+  
+[[redirects]]
+  from = "/config"
+  to = "/worker.js"
+  status = 200
